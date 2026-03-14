@@ -30,7 +30,7 @@ cd path/to/MiniProject
 ./run-local.sh
 ```
 
-**Windows:** Double‑click **run-local.bat** (or in Command Prompt run `run-local.bat` from that folder). It starts the backend in a new window, then the frontend. Keep the **Backend** window open. If you see “ERR_CONNECTION_REFUSED” when logging in, the backend is not running: leave the Backend window open and try again.
+**Windows:** Double‑click **run-local.bat** (or in Command Prompt run `run-local.bat` from that folder). If Node.js/npm is missing, the script will auto-download a local portable Node.js into `.tools/node` and continue (no admin install needed). Keep the window open while it runs.
 
 ### 4. Open the app
 
@@ -47,4 +47,4 @@ When the frontend is up, open in your browser: **http://localhost:3000**
 | | | **Windows:** double‑click `run-local.bat` |
 | Open in browser | — | http://localhost:3000 |
 
-You need **Python 3** and **Node.js** (and npm). **PostgreSQL is optional:** if it is not installed or not running on port 5432, the script uses SQLite so the app still runs. To use PostgreSQL instead, see **backend/POSTGRES-SETUP.md**.
+You need **Python 3**. On Windows, **Node.js/npm can be auto-bootstrapped** by `run-local.bat` if missing. **PostgreSQL is optional:** if it is not installed or not running on port 5432, the script uses SQLite so the app still runs. To use PostgreSQL instead, see **backend/POSTGRES-SETUP.md**.

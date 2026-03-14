@@ -31,3 +31,4 @@ Thumbs.db
 # Logs and cache
 *.log
 .cache/
+.tools/
