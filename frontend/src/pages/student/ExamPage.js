@@ -21,7 +21,6 @@ const ExamPage = () => {
   
   const { 
     questions, 
-    examSession, 
     loading, 
     error, 
     startExam, 

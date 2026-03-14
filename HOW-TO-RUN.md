@@ -8,7 +8,7 @@ Nothing is downloaded from GitHub. The script uses the **backend** and **fronten
 
 ### 1. Unzip
 
-Unzip **MiniProject** somewhere (e.g. Desktop). You should see a folder with `backend`, `frontend`, `run-local.sh`, and `run-local.bat` inside.
+Unzip **MiniProject** somewhere (e.g. Desktop). You should see a folder with `backend`, `frontend`, and `run-local.bat` (Windows) or `run-local.sh` (Linux/Mac) inside.
 
 ### 2. Go to that folder
 
@@ -30,7 +30,7 @@ cd path/to/MiniProject
 ./run-local.sh
 ```
 
-**Windows:** Double‑click **run-local.bat** (or in Command Prompt run `run-local.bat` from that folder).
+**Windows:** Double‑click **run-local.bat** (or in Command Prompt run `run-local.bat` from that folder). It starts the backend in a new window, then the frontend. Keep the **Backend** window open. If you see “ERR_CONNECTION_REFUSED” when logging in, the backend is not running: leave the Backend window open and try again.
 
 ### 4. Open the app
 
