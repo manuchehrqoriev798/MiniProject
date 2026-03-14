@@ -1,0 +1,28 @@
+# Backend repo: deploy this API + Postgres from the root of the BACKEND repo.
+#
+# 1. In Render: New → Blueprint → Connect your BACKEND GitHub repo.
+# 2. After deploy, copy your backend URL (e.g. https://exam-platform-api.onrender.com).
+# 3. Deploy the FRONTEND repo and set REACT_APP_API_URL to: <backend-url>/api
+# 4. In this service's Environment, set CORS_ORIGINS to your frontend URL.
+
+services:
+  - type: web
+    name: exam-platform-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    releaseCommand: "alembic upgrade head"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://exam-platform-frontend.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: exam-platform-db
+          property: connectionString
+
+databases:
+  - name: exam-platform-db
+    plan: free
+    databaseName: exam_platform
+    user: exam_platform

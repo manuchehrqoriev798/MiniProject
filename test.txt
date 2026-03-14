@@ -1,0 +1,27 @@
+cd backend
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+alembic upgrade head      # creates DB tables
+python seed.py            # adds demo users & questions
+uvicorn app.main:app --reload --port 8000
+
+
+
+
+cd frontend
+npm install
+npm start
+
+
+
+
+
+
+
+teacher@school.edu
+teacher123
+manu@school.edu
+manu123
+
+student@school.edu
+student123

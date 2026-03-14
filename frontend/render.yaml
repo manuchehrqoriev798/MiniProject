@@ -1,0 +1,18 @@
+# Frontend repo: deploy this as a Static Site from the root of the FRONTEND repo.
+#
+# 1. Deploy the BACKEND first and copy its URL (e.g. https://exam-platform-api.onrender.com).
+# 2. In Render: New → Blueprint → Connect your FRONTEND GitHub repo.
+# 3. In this service's Environment, set REACT_APP_API_URL to: <backend-url>/api
+#    Example: https://exam-platform-api.onrender.com/api
+# 4. (Optional) Add CORS_ORIGINS on the backend service with this frontend URL.
+
+services:
+  - type: web
+    name: exam-platform-frontend
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        sync: false
+        # Set in Render Dashboard to your backend URL + /api, e.g. https://exam-platform-api.onrender.com/api

@@ -1,0 +1,14 @@
+# You have BACKEND, FRONTEND, and WORKFLOW as separate repos.
+# Do NOT use this file for Blueprint — use the render.yaml inside each repo:
+#
+#   • BACKEND repo  → use backend/render.yaml  (and backend/Dockerfile)
+#   • FRONTEND repo → use frontend/render.yaml
+#
+# Copy backend/render.yaml + backend/Dockerfile to the root of your backend repo.
+# Copy frontend/render.yaml to the root of your frontend repo.
+# Then in Render: New → Blueprint, connect each repo and use that repo’s render.yaml.
+#
+# Order: deploy BACKEND first, then set REACT_APP_API_URL on the frontend to <backend-url>/api.
+
+services: []
+databases: []
