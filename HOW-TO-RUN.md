@@ -47,4 +47,4 @@ When the frontend is up, open in your browser: **http://localhost:3000**
 | | | **Windows:** double‑click `run-local.bat` |
 | Open in browser | — | http://localhost:3000 |
 
-You need **Python 3** and **Node.js** (and npm) installed. No Git needed.
+You need **Python 3** and **Node.js** (and npm). **PostgreSQL is optional:** if it is not installed or not running on port 5432, the script uses SQLite so the app still runs. To use PostgreSQL instead, see **backend/POSTGRES-SETUP.md**.

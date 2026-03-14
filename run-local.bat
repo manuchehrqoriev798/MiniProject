@@ -13,8 +13,17 @@ if not exist "frontend" (
   exit /b 1
 )
 
+REM If PostgreSQL is not running on port 5432, use SQLite so the app works without installing Postgres
+set USE_SQLITE=
+python -c "import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1', 5432)); s.close()" 2>nul || set USE_SQLITE=1
+if defined USE_SQLITE (
+  echo PostgreSQL not detected on port 5432. Using SQLite for this run so the app works without Postgres.
+  echo To use PostgreSQL, install it and start the service, then run this script again. See backend\POSTGRES-SETUP.md
+  echo.
+)
+
 echo === Starting backend in new window (keep it open) ===
-start "Backend" cmd /k "cd /d ""%~dp0backend"" & if not exist venv python -m venv venv & call venv\Scripts\activate.bat & pip install -r requirements.txt & alembic upgrade head & python seed.py & uvicorn app.main:app --reload --port 8000"
+start "Backend" cmd /k "cd /d ""%~dp0backend"" & if defined USE_SQLITE set USE_SQLITE=1 & if not exist venv python -m venv venv & call venv\Scripts\activate.bat & pip install -r requirements.txt & alembic upgrade head & python seed.py & uvicorn app.main:app --reload --port 8000"
 
 echo Waiting for backend to start...
 timeout /t 8 /nobreak >nul

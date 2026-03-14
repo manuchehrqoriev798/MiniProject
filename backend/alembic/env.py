@@ -16,8 +16,8 @@ from app.config import settings
 # this is the Alembic Config object
 config = context.config
 
-# Override sqlalchemy.url from .env if set
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# Use database_url so USE_SQLITE fallback is respected (run-local sets USE_SQLITE when Postgres is not available)
+config.set_main_option("sqlalchemy.url", settings.database_url)
 
 # Interpret the config file for Python logging.
 if config.config_file_name is not None:
