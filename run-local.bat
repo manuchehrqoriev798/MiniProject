@@ -22,13 +22,19 @@ if defined USE_SQLITE (
   echo.
 )
 
-echo === Starting backend in new window (keep it open) ===
-start "Backend" cmd /k "cd /d ""%~dp0backend"" & if defined USE_SQLITE set USE_SQLITE=1 & if not exist venv python -m venv venv & call venv\Scripts\activate.bat & pip install -r requirements.txt & alembic upgrade head & python seed.py & uvicorn app.main:app --reload --port 8000"
+echo === Starting backend in new window (keep it open - do not close it) ===
+if defined USE_SQLITE (
+  start "Backend" cmd /k "set USE_SQLITE=1 & cd /d ""%~dp0backend"" & if not exist venv python -m venv venv & call venv\Scripts\activate.bat & pip install -r requirements.txt & alembic upgrade head & python seed.py & echo. & echo Backend running at http://localhost:8000 - keep this window open. & echo. & uvicorn app.main:app --reload --port 8000 & pause"
+) else (
+  start "Backend" cmd /k "cd /d ""%~dp0backend"" & if not exist venv python -m venv venv & call venv\Scripts\activate.bat & pip install -r requirements.txt & alembic upgrade head & python seed.py & echo. & echo Backend running at http://localhost:8000 - keep this window open. & echo. & uvicorn app.main:app --reload --port 8000 & pause"
+)
 
-echo Waiting for backend to start...
-timeout /t 8 /nobreak >nul
+echo Waiting for backend to start (give it time to install deps and run)...
+timeout /t 15 /nobreak >nul
 
 echo === Setting up frontend ===
+echo If login fails with "connection refused", check the Backend window - it must stay open and show "Uvicorn running on http://127.0.0.1:8000".
+echo.
 cd frontend
 call npm install
 echo Opening browser at http://localhost:3000 in a few seconds...
